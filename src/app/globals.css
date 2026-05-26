@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Brand palette */
+  --color-brand-black: #0A0A0A;
+  --color-brand-white: #FFFFFF;
+
+  /* Volt accent — replaces purple */
+  --color-volt:     #C6FF3D;
+  --color-volt-400: #d4f56a;
+  --color-volt-500: #C6FF3D;
+  --color-volt-600: #a8db1f;
+  --color-volt-700: #7fa809;
+  --color-volt-800: #4d6600;
+  --color-volt-900: #2a3800;
+  --color-volt-950: #141c00;
+
+  /* Surface tones for dark mode cards / sections */
+  --color-surface:   #111111;
+  --color-surface-2: #0f0f0f;
+
+  /* Legacy purple kept for any remaining references */
+  --color-brand-purple: #7C3AED;
+  --color-brand-purple-50:  #F5F3FF;
+  --color-brand-purple-100: #EDE9FE;
+  --color-brand-purple-200: #DDD6FE;
+  --color-brand-purple-300: #C4B5FD;
+  --color-brand-purple-400: #A78BFA;
+  --color-brand-purple-500: #8B5CF6;
+  --color-brand-purple-600: #7C3AED;
+  --color-brand-purple-700: #6D28D9;
+  --color-brand-purple-800: #5B21B6;
+  --color-brand-purple-900: #4C1D95;
+  --color-brand-purple-950: #2E1065;
+
+  /* Fonts */
+  --font-sans:    var(--font-inter),          ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk),  var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    var(--font-jetbrains),      ui-monospace, monospace;
+
+  /* Animations */
+  --animate-fade-in:  fade-in  0.6s ease-out;
+  --animate-slide-up: slide-up 0.6s ease-out;
+  --animate-marquee:  marquee  28s linear infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes slot-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+@keyframes slot-arc-pulse {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.75; }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    background-color: var(--color-brand-black);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  button {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background-color: var(--color-volt);
+    color: #000000;
+  }
 }

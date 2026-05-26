@@ -1,0 +1,17 @@
+node_modules
+.next
+.git
+.gitignore
+.env*.local
+.vscode
+.idea
+*.log
+npm-debug.log*
+Dockerfile
+.dockerignore
+README.md
+AGENTS.md
+CLAUDE.md
+docs
+src/app/print
+.claude
