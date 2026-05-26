@@ -31,7 +31,7 @@ const SLIDES: { name: string; render: () => React.ReactNode }[] = [
   { name: "Pega Urso",         render: () => <CaixaMisteriosaDemo /> },
 ];
 
-const ROTATE_MS = 6500;
+const ROTATE_MS = 3500;
 
 export function HeroTotem() {
   const [idx, setIdx] = useState(0);
@@ -46,22 +46,8 @@ export function HeroTotem() {
   const current = SLIDES[idx];
 
   return (
-    <div className="w-full max-w-[380px]">
-      <TotemMockup>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            {current.render()}
-          </motion.div>
-        </AnimatePresence>
-      </TotemMockup>
-
-      <div className="mt-5 flex items-center justify-center gap-2">
+    <div className="flex w-full max-w-[380px] flex-col items-center">
+      <div className="mb-5 flex items-center gap-2">
         <span className="inline-block h-1.5 w-1.5 rounded-full bg-volt animate-pulse" />
         <AnimatePresence mode="wait">
           <motion.span
@@ -69,13 +55,27 @@ export function HeroTotem() {
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
             className="font-display text-xs font-semibold uppercase tracking-[0.25em] text-white/70"
           >
             {current.name}
           </motion.span>
         </AnimatePresence>
       </div>
+
+      <TotemMockup>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={idx}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {current.render()}
+          </motion.div>
+        </AnimatePresence>
+      </TotemMockup>
     </div>
   );
 }

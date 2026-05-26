@@ -11,8 +11,8 @@ export function HeroSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(198,255,61,0.07),transparent_60%),radial-gradient(ellipse_at_bottom_left,rgba(198,255,61,0.04),transparent_55%)]"
       />
-      <Container className="relative grid gap-16 py-20 md:grid-cols-[1.1fr_1fr] md:gap-12 md:py-28 lg:py-32">
-        <div className="flex flex-col justify-center">
+      <Container className="relative grid gap-16 pt-20 md:grid-cols-[1.1fr_1fr] md:gap-12 md:pt-28 lg:pt-32">
+        <div className="flex flex-col justify-center pb-20 md:pb-28 lg:pb-32">
           <p className="font-medium uppercase tracking-[0.2em] text-volt text-xs">
             Jogos interativos para eventos
           </p>
@@ -46,7 +46,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative flex min-h-[400px] items-center justify-center md:min-h-[480px]">
+        <div className="relative flex min-h-[400px] items-end justify-center md:min-h-[520px]">
           <HeroTotem />
         </div>
       </Container>
