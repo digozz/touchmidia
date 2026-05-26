@@ -13,7 +13,8 @@ import { QuizDemo } from "@/components/demo/QuizDemo";
 import { VerdadeiroFalsoDemo } from "@/components/demo/VerdadeiroFalsoDemo";
 import { PegueOsItensDemo } from "@/components/demo/PegueOsItensDemo";
 import { CaixaMisteriosaDemo } from "@/components/demo/CaixaMisteriosaDemo";
-import { games, getGameBySlug } from "@/content/games";
+import { games, getGameBySlug, CATEGORY_LABELS } from "@/content/games";
+import { SITE_URL } from "@/lib/contact";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -72,5 +73,43 @@ export default async function GameDetailPage({ params }: Props) {
   const demo = DEMOS[game.slug] ?? placeholder(game.name);
   const otherGames = games.filter((g) => g.slug !== game.slug);
 
-  return <GameDetailLayout game={game} demo={demo} otherGames={otherGames} />;
+  const url = `${SITE_URL}/jogos/${game.slug}`;
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Início", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "Jogos", item: `${SITE_URL}/jogos` },
+        { "@type": "ListItem", position: 3, name: game.name, item: url },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: game.name,
+      url,
+      description: game.longDescription,
+      category: CATEGORY_LABELS[game.category],
+      provider: { "@id": `${SITE_URL}/#organization` },
+      areaServed: "BR",
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "BRL",
+        price: game.priceFrom.replace(/[^0-9,]/g, "").replace(",", "."),
+        availability: "https://schema.org/InStock",
+        url,
+      },
+    },
+  ];
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <GameDetailLayout game={game} demo={demo} otherGames={otherGames} />
+    </>
+  );
 }

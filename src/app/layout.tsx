@@ -1,6 +1,38 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { SITE_URL, WHATSAPP_NUMBER, CONTACT_EMAIL } from "@/lib/contact";
 import "./globals.css";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
+    name: "TOUCH MIDIA",
+    alternateName: "Touch Mídia",
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo-mark-white.png`,
+    email: CONTACT_EMAIL,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: `+${WHATSAPP_NUMBER}`,
+      contactType: "sales",
+      areaServed: "BR",
+      availableLanguage: ["Portuguese"],
+    },
+    description:
+      "Totens interativos com jogos personalizados para eventos corporativos: captura de leads, gamificação de marca e dashboard em tempo real.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    url: SITE_URL,
+    name: "TOUCH MIDIA",
+    inLanguage: "pt-BR",
+    publisher: { "@id": `${SITE_URL}/#organization` },
+  },
+];
 
 const inter = Inter({
   variable: "--font-inter",
@@ -72,6 +104,10 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-brand-black text-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
       </body>
     </html>
