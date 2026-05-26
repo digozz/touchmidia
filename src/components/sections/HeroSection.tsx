@@ -1,6 +1,6 @@
 ﻿import { Container } from "@/components/layout/Container";
 import { WhatsappButton } from "@/components/ui/WhatsappButton";
-import { EventHallIllustration } from "@/components/illustrations/EventHallIllustration";
+import { HeroTotem } from "@/components/sections/HeroTotem";
 import { WHATSAPP_MESSAGES } from "@/lib/contact";
 import Link from "next/link";
 
@@ -47,7 +47,7 @@ export function HeroSection() {
         </div>
 
         <div className="relative flex min-h-[400px] items-center justify-center md:min-h-[480px]">
-          <EventHallIllustration />
+          <HeroTotem />
         </div>
       </Container>
     </section>
