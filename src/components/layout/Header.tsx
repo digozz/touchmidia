@@ -35,6 +35,7 @@ export function Header() {
           message={WHATSAPP_MESSAGES.generic}
           variant="primary"
           size="sm"
+          className="hidden sm:inline-flex"
         >
           Falar no WhatsApp
         </WhatsappButton>

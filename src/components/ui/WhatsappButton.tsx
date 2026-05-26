@@ -37,7 +37,7 @@ export function WhatsappButton({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full font-display font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-volt",
+        "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-display font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-volt",
         variantClasses[variant],
         sizeClasses[size],
         className,
