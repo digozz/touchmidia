@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 export function EventHallIllustration() {
   return (
@@ -157,12 +157,12 @@ function Floating({
   delay?: number; amplitude?: number; duration?: number; children: React.ReactNode;
 }) {
   return (
-    <motion.g
+    <m.g
       animate={{ y: [0, -amplitude, 0] }}
       transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
     >
       {children}
-    </motion.g>
+    </m.g>
   );
 }
 
@@ -214,13 +214,13 @@ function TotemScreen({ ox, oy, oz, w, h }: { ox: number; oy: number; oz: number;
       <path d={pathOf([A, B, C, D])} fill="url(#totem-screen)" />
       <g transform={`translate(${cx.toFixed(2)} ${cy.toFixed(2)})`}>
         <circle r="10" fill="#0A0A0A" />
-        <motion.g
+        <m.g
           animate={{ rotate: 360 }}
           transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
         >
           <path d="M 0 0 L 0 -10 A 10 10 0 0 1 8.7 5 Z" fill="#C6FF3D" />
           <path d="M 0 0 L 8.7 5 A 10 10 0 0 1 -8.7 5 Z" fill="#9FD61A" />
-        </motion.g>
+        </m.g>
         <circle r="2" fill="#0A0A0A" />
       </g>
     </g>
@@ -304,7 +304,7 @@ function ArrivingPerson({
   const dy = from.y - target.y;
 
   return (
-    <motion.g
+    <m.g
       transform={`translate(${target.x.toFixed(2)} ${target.y.toFixed(2)})`}
       initial={{ x: dx, y: dy, opacity: 0 }}
       animate={{
@@ -322,6 +322,6 @@ function ArrivingPerson({
       }}
     >
       <PersonFigure {...colors} />
-    </motion.g>
+    </m.g>
   );
 }

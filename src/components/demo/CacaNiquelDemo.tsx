@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { DemoShell } from "./DemoShell";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -54,7 +55,7 @@ function findTargetInStrip(reelIdx: number, key: SymKey): number {
 function SymCell({ k }: { k: SymKey }) {
   if (k === "T") {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src="/logo-mark-white.png" alt="" style={{ height: 150, width: "auto", display: "block" }} />;
+    return <Image src="/logo-mark-white.png" alt="" width={194} height={150} priority style={{ display: "block" }} />;
   }
   if (k === "7") {
     return (
@@ -275,7 +276,7 @@ export function CacaNiquelDemo() {
         }}>
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo-mark-white.png" alt="" style={{ height: 54, width: "auto" }} />
+            <Image src="/logo-mark-white.png" alt="" width={70} height={54} />
             <div style={{ display: "flex", flexDirection: "column", lineHeight: 1, gap: 4 }}>
               <span style={{ fontWeight: 600, fontSize: 26, letterSpacing: "0.04em" }}>TOUCH</span>
               <span style={{ fontWeight: 400, fontSize: 13, letterSpacing: "0.42em", color: "#9CA3AF" }}>MÍDIA</span>

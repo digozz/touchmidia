@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { DemoShell } from "./DemoShell";
 
 // ── Layout ────────────────────────────────────────────────────
@@ -559,12 +559,12 @@ export function CaixaMisteriosaDemo() {
 
       <AnimatePresence>
         {isResult && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="absolute inset-0 flex flex-col items-center justify-center bg-brand-black/92"
           >
-            <motion.div
+            <m.div
               initial={{ scale: 0.82, opacity: 0 }}
               animate={{ scale: 1,    opacity: 1 }}
               transition={{ delay: 0.05, type: "spring", stiffness: 290, damping: 22 }}
@@ -596,8 +596,8 @@ export function CaixaMisteriosaDemo() {
               >
                 Jogar de novo
               </button>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </DemoShell>

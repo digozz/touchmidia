@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion";
+import { m, AnimatePresence, useMotionValue, animate } from "framer-motion";
 import { DemoShell } from "./DemoShell";
 
 const COLS = 4;
@@ -191,12 +191,12 @@ export function QuebracabecaDemo() {
       {/* End overlay */}
       <AnimatePresence>
         {ended && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-brand-black/95 px-10"
           >
-            <motion.div
+            <m.div
               initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.1 }}
@@ -213,8 +213,8 @@ export function QuebracabecaDemo() {
               >
                 Jogar de novo
               </button>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
 
@@ -250,7 +250,7 @@ function Piece({
   }, [isPlaced, snapX, snapY, mx, my]);
 
   return (
-    <motion.div
+    <m.div
       drag={!isPlaced}
       dragMomentum={false}
       style={{

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { DemoShell } from "./DemoShell";
 
 type Question = {
@@ -105,7 +105,7 @@ export function QuizDemo() {
 
         {/* Progress bar */}
         <div className="mx-6 h-0.5 overflow-hidden rounded-full bg-white/5">
-          <motion.div
+          <m.div
             className="h-full bg-volt"
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.4, ease: "easeOut" }}
@@ -116,7 +116,7 @@ export function QuizDemo() {
         <div className="flex flex-1 flex-col px-5 pt-6 pb-8">
           <AnimatePresence mode="wait">
             {phase !== "ended" ? (
-              <motion.div
+              <m.div
                 key={current}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -135,7 +135,7 @@ export function QuizDemo() {
                     const dim        = phase === "feedback" && !isCorrect && !isSelected;
 
                     return (
-                      <motion.button
+                      <m.button
                         key={i}
                         onClick={() => pick(i)}
                         disabled={phase !== "question"}
@@ -178,13 +178,13 @@ export function QuizDemo() {
                           {String.fromCharCode(65 + i)}
                         </span>
                         {opt}
-                      </motion.button>
+                      </m.button>
                     );
                   })}
                 </div>
-              </motion.div>
+              </m.div>
             ) : (
-              <motion.div
+              <m.div
                 key="ended"
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -203,7 +203,7 @@ export function QuizDemo() {
                 >
                   Jogar de novo
                 </button>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
         </div>

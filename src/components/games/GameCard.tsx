@@ -12,6 +12,7 @@ export function GameCard({ game, className }: Props) {
   return (
     <Link
       href={`/jogos/${game.slug}`}
+      prefetch={false}
       className={cn(
         "group relative flex flex-col overflow-hidden rounded-2xl border border-white/8 bg-surface-2 transition-all duration-300",
         "hover:-translate-y-1 hover:border-volt/40 hover:shadow-xl hover:shadow-volt/10",

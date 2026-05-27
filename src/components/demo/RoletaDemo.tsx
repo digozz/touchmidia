@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, AnimatePresence, useMotionValue, animate } from "framer-motion";
+import { m, AnimatePresence, useMotionValue, animate } from "framer-motion";
 import { RotateCw } from "lucide-react";
 import { DemoShell } from "./DemoShell";
 
@@ -137,7 +137,7 @@ export function RoletaDemo() {
         </div>
 
         {/* Roda — interação de giro */}
-        <motion.div
+        <m.div
           ref={wheelRef}
           className="relative h-full w-full touch-none select-none cursor-grab active:cursor-grabbing"
           style={{ rotate: rotationMV }}
@@ -182,12 +182,12 @@ export function RoletaDemo() {
             <text x={cx} y={cy} fill="#0A0A0A" fontSize="6" fontWeight="800" fontFamily="var(--font-display)" textAnchor="middle" dominantBaseline="middle" letterSpacing="0.5">TOUCH</text>
             <text x={cx} y={cy + 6} fill="#0A0A0A" fontSize="5" fontWeight="700" fontFamily="var(--font-display)" textAnchor="middle" dominantBaseline="middle" letterSpacing="0.5">MIDIA</text>
           </svg>
-        </motion.div>
+        </m.div>
 
         {/* Resultado overlay */}
         <AnimatePresence>
           {result && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
@@ -223,7 +223,7 @@ export function RoletaDemo() {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

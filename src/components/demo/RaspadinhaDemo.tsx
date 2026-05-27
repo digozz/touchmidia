@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { m, AnimatePresence } from "framer-motion";
 import { DemoShell } from "./DemoShell";
 
 type Phase = "selecting" | "scratching" | "ended";
@@ -129,7 +130,7 @@ export function RaspadinhaDemo() {
       {/* ── SELECTING ── */}
       <AnimatePresence>
         {phase === "selecting" && (
-          <motion.div
+          <m.div
             key="selecting"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -144,7 +145,7 @@ export function RaspadinhaDemo() {
 
             {/* Falling cards */}
             {FALLING_CARDS.map((col, i) => (
-              <motion.button
+              <m.button
                 key={i}
                 onClick={selectCard}
                 style={{ position: "absolute", left: col.x, top: 0, padding: 0, background: "none", border: "none" }}
@@ -164,16 +165,16 @@ export function RaspadinhaDemo() {
                 }}
               >
                 <MiniCard />
-              </motion.button>
+              </m.button>
             ))}
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* ── SCRATCHING / ENDED ── */}
       <AnimatePresence>
         {phase !== "selecting" && prize && (
-          <motion.div
+          <m.div
             key="scratch"
             initial={{ opacity: 0, scale: 0.88 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -196,8 +197,7 @@ export function RaspadinhaDemo() {
 
               {/* Header strip */}
               <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: SCRATCH_TOP, backgroundColor: "#C6FF3D", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo-mark-black.png" alt="Touch Mídia" style={{ height: 22, width: "auto" }} onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                <Image src="/logo-mark-dark.png" alt="Touch Mídia" width={28} height={22} />
                 <span style={{ fontFamily: "var(--font-display)", fontSize: 9, fontWeight: 800, color: "#0A0A0A", letterSpacing: "0.2em", textTransform: "uppercase" }}>Raspadinha</span>
               </div>
 
@@ -248,17 +248,17 @@ export function RaspadinhaDemo() {
             {/* Jogar de novo */}
             <AnimatePresence>
               {phase === "ended" && (
-                <motion.button
+                <m.button
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   onClick={restart}
                   className="inline-flex h-14 items-center justify-center rounded-full bg-volt px-12 font-display text-base font-bold text-brand-black"
                 >
                   Jogar de novo
-                </motion.button>
+                </m.button>
               )}
             </AnimatePresence>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </DemoShell>

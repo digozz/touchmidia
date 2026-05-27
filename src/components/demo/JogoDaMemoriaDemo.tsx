@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { DemoShell } from "./DemoShell";
 
 const SYMBOLS = ["★", "♦", "▲", "●", "♠", "♥", "■", "♣"];
@@ -177,12 +177,12 @@ export function JogoDaMemoriaDemo() {
       {/* End overlay */}
       <AnimatePresence>
         {ended && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="absolute inset-0 flex flex-col items-center justify-center bg-brand-black/95 px-10"
           >
-            <motion.div
+            <m.div
               initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.1 }}
@@ -201,8 +201,8 @@ export function JogoDaMemoriaDemo() {
               >
                 Jogar de novo
               </button>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
 

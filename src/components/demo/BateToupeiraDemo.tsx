@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { buildWhatsappUrl } from "@/lib/contact";
 import { cn } from "@/lib/utils";
@@ -406,23 +406,23 @@ function HoleAndMole({
       <g clipPath={`url(#mole-clip-${cx}-${cy})`}>
         <AnimatePresence>
           {slot.state === "active" && (
-            <motion.g
+            <m.g
               initial={{ y: 70, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
               transition={{ duration: 0.28, ease: "easeOut" }}
             >
               <Mole cx={cx} cy={cy} accent={slot.accent} />
-            </motion.g>
+            </m.g>
           )}
           {slot.state === "hit" && (
-            <motion.g
+            <m.g
               initial={{ y: 0 }}
               animate={{ y: 10 }}
               transition={{ duration: 0.25 }}
             >
               <Mole cx={cx} cy={cy} accent={slot.accent} dazed />
-            </motion.g>
+            </m.g>
           )}
         </AnimatePresence>
       </g>
@@ -456,7 +456,7 @@ function Hole({ cx, cy }: { cx: number; cy: number }) {
 
 function ImpactRays({ cx, cy }: { cx: number; cy: number }) {
   return (
-    <motion.g
+    <m.g
       initial={{ scale: 0.4, opacity: 1 }}
       animate={{ scale: 1.4, opacity: 0 }}
       transition={{ duration: 0.35, ease: "easeOut" }}
@@ -477,13 +477,13 @@ function ImpactRays({ cx, cy }: { cx: number; cy: number }) {
         />
       </g>
       <circle cx={cx} cy={cy - 38} r="14" fill={VOLT_DARK} opacity="0.7" />
-    </motion.g>
+    </m.g>
   );
 }
 
 function Hammer({ cx, cy }: { cx: number; cy: number }) {
   return (
-    <motion.g
+    <m.g
       initial={{ y: -100, rotate: -55 }}
       animate={{
         y: [-100, -10, -10, -60],
@@ -505,7 +505,7 @@ function Hammer({ cx, cy }: { cx: number; cy: number }) {
       <rect x={cx - 10} y={cy - 50} width="48" height="6" rx="2"
         fill="#FFFFFF" fillOpacity="0.3" />
       <rect x={cx + 32} y={cy - 50} width="6" height="22" fill="#991B1B" />
-    </motion.g>
+    </m.g>
   );
 }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { DemoShell } from "./DemoShell";
 
 const W = 360;
@@ -624,7 +624,7 @@ export function PenaltiDemo() {
       {/* Flash overlay */}
       <AnimatePresence>
         {flashKind && (
-          <motion.div
+          <m.div
             key={`${flashKind}-${results.length}`}
             initial={{ opacity: 0, scale: 0.75 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -642,19 +642,19 @@ export function PenaltiDemo() {
             >
               {flashKind === "goal" ? "GOL!" : "FORA!"}
             </span>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* End overlay */}
       <AnimatePresence>
         {phase === "ended" && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="absolute inset-0 flex flex-col items-center justify-center bg-brand-black/90"
           >
-            <motion.div
+            <m.div
               initial={{ scale: 0.85, opacity: 0 }}
               animate={{ scale: 1,    opacity: 1 }}
               transition={{ delay: 0.08, type: "spring", stiffness: 280, damping: 22 }}
@@ -673,8 +673,8 @@ export function PenaltiDemo() {
               >
                 Jogar de novo
               </button>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </DemoShell>

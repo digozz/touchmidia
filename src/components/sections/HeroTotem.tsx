@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ComponentType } from "react";
 import dynamic from "next/dynamic";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { TotemMockup } from "@/components/demo/TotemMockup";
 
 // Cada demo vira chunk próprio. Carregamento sob demanda.
@@ -44,7 +44,7 @@ export function HeroTotem() {
       <div className="mb-5 flex items-center gap-2">
         <span className="inline-block h-1.5 w-1.5 rounded-full bg-volt animate-pulse" />
         <AnimatePresence mode="wait">
-          <motion.span
+          <m.span
             key={idx}
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
@@ -53,13 +53,13 @@ export function HeroTotem() {
             className="font-display text-xs font-semibold uppercase tracking-[0.25em] text-white/70"
           >
             {current.name}
-          </motion.span>
+          </m.span>
         </AnimatePresence>
       </div>
 
       <TotemMockup>
         <AnimatePresence mode="wait">
-          <motion.div
+          <m.div
             key={idx}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -67,7 +67,7 @@ export function HeroTotem() {
             transition={{ duration: 0.3 }}
           >
             <Demo />
-          </motion.div>
+          </m.div>
         </AnimatePresence>
       </TotemMockup>
     </div>

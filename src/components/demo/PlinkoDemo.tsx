@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, animate, useMotionValue } from "framer-motion";
+import { m, animate, useMotionValue } from "framer-motion";
 import { DemoShell } from "./DemoShell";
 
 // ===== Tela 9:16 vertical =====
@@ -308,7 +308,7 @@ export function PlinkoDemo() {
         {ALL_PEGS.map((p, i) => <Peg key={i} cx={p.x} cy={p.y} />)}
 
         {/* Bola */}
-        <motion.g
+        <m.g
           style={{ x: ballX, y: ballY, scale: ballScale, opacity: ballOpacity }}
           drag={phase === "ready" ? "x" : false}
           dragConstraints={{ left: BOARD_X_START, right: BOARD_X_END }}
@@ -317,7 +317,7 @@ export function PlinkoDemo() {
           onDrag={() => { hasPositioned.current = true; }}
         >
           <Ball />
-        </motion.g>
+        </m.g>
 
         {/* Slots */}
         <Slots lastSlotIndex={lastResult?.slotIndex ?? null} />
@@ -412,7 +412,7 @@ function Slots({ lastSlotIndex }: { lastSlotIndex: number | null }) {
               {slot.mult}x
             </text>
             {isHit && (
-              <motion.rect
+              <m.rect
                 x={x + 2} y={SLOT_Y_TOP} width={SLOT_WIDTH - 4} height="50" rx="5"
                 fill="none" stroke="#C6FF3D" strokeWidth="3"
                 initial={{ opacity: 1, scale: 1 }}
