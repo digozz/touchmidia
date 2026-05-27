@@ -1,34 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ComponentType } from "react";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { TotemMockup } from "@/components/demo/TotemMockup";
-import { BateToupeiraDemo } from "@/components/demo/BateToupeiraDemo";
-import { CacaNiquelDemo } from "@/components/demo/CacaNiquelDemo";
-import { CaixaMisteriosaDemo } from "@/components/demo/CaixaMisteriosaDemo";
-import { JogoDaMemoriaDemo } from "@/components/demo/JogoDaMemoriaDemo";
-import { PegueOsItensDemo } from "@/components/demo/PegueOsItensDemo";
-import { PenaltiDemo } from "@/components/demo/PenaltiDemo";
-import { PlinkoDemo } from "@/components/demo/PlinkoDemo";
-import { QuebracabecaDemo } from "@/components/demo/QuebracabecaDemo";
-import { QuizDemo } from "@/components/demo/QuizDemo";
-import { RaspadinhaDemo } from "@/components/demo/RaspadinhaDemo";
-import { RoletaDemo } from "@/components/demo/RoletaDemo";
-import { VerdadeiroFalsoDemo } from "@/components/demo/VerdadeiroFalsoDemo";
 
-const SLIDES: { name: string; render: () => React.ReactNode }[] = [
-  { name: "Roleta",            render: () => <RoletaDemo /> },
-  { name: "Plinko",            render: () => <PlinkoDemo /> },
-  { name: "Raspadinha",        render: () => <RaspadinhaDemo /> },
-  { name: "Bate-Toupeira",     render: () => <BateToupeiraDemo /> },
-  { name: "Cobrança de Pênalti", render: () => <PenaltiDemo /> },
-  { name: "Caça-Níquel",       render: () => <CacaNiquelDemo /> },
-  { name: "Pegue os Itens",    render: () => <PegueOsItensDemo /> },
-  { name: "Quiz",              render: () => <QuizDemo /> },
-  { name: "Jogo da Memória",   render: () => <JogoDaMemoriaDemo /> },
-  { name: "Quebra-Cabeça",     render: () => <QuebracabecaDemo /> },
-  { name: "Flappy",            render: () => <VerdadeiroFalsoDemo /> },
-  { name: "Pega Urso",         render: () => <CaixaMisteriosaDemo /> },
+// Cada demo vira chunk próprio. Carregamento sob demanda.
+const lazy = (loader: () => Promise<{ [k: string]: ComponentType }>, exportName: string) =>
+  dynamic(() => loader().then((m) => ({ default: m[exportName] })), { ssr: false });
+
+const SLIDES: { name: string; Demo: ComponentType }[] = [
+  { name: "Roleta",              Demo: lazy(() => import("@/components/demo/RoletaDemo"), "RoletaDemo") },
+  { name: "Plinko",              Demo: lazy(() => import("@/components/demo/PlinkoDemo"), "PlinkoDemo") },
+  { name: "Raspadinha",          Demo: lazy(() => import("@/components/demo/RaspadinhaDemo"), "RaspadinhaDemo") },
+  { name: "Bate-Toupeira",       Demo: lazy(() => import("@/components/demo/BateToupeiraDemo"), "BateToupeiraDemo") },
+  { name: "Cobrança de Pênalti", Demo: lazy(() => import("@/components/demo/PenaltiDemo"), "PenaltiDemo") },
+  { name: "Caça-Níquel",         Demo: lazy(() => import("@/components/demo/CacaNiquelDemo"), "CacaNiquelDemo") },
+  { name: "Pegue os Itens",      Demo: lazy(() => import("@/components/demo/PegueOsItensDemo"), "PegueOsItensDemo") },
+  { name: "Quiz",                Demo: lazy(() => import("@/components/demo/QuizDemo"), "QuizDemo") },
+  { name: "Jogo da Memória",     Demo: lazy(() => import("@/components/demo/JogoDaMemoriaDemo"), "JogoDaMemoriaDemo") },
+  { name: "Quebra-Cabeça",       Demo: lazy(() => import("@/components/demo/QuebracabecaDemo"), "QuebracabecaDemo") },
+  { name: "Flappy",              Demo: lazy(() => import("@/components/demo/VerdadeiroFalsoDemo"), "VerdadeiroFalsoDemo") },
+  { name: "Pega Urso",           Demo: lazy(() => import("@/components/demo/CaixaMisteriosaDemo"), "CaixaMisteriosaDemo") },
 ];
 
 const ROTATE_MS = 3500;
@@ -44,6 +37,7 @@ export function HeroTotem() {
   }, []);
 
   const current = SLIDES[idx];
+  const Demo = current.Demo;
 
   return (
     <div className="flex w-full max-w-[380px] flex-col items-center">
@@ -72,7 +66,7 @@ export function HeroTotem() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            {current.render()}
+            <Demo />
           </motion.div>
         </AnimatePresence>
       </TotemMockup>

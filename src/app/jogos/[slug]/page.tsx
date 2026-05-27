@@ -1,18 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GameDetailLayout } from "@/components/games/GameDetailLayout";
-import { BateToupeiraDemo } from "@/components/demo/BateToupeiraDemo";
-import { CacaNiquelDemo } from "@/components/demo/CacaNiquelDemo";
-import { PlinkoDemo } from "@/components/demo/PlinkoDemo";
-import { PenaltiDemo } from "@/components/demo/PenaltiDemo";
-import { RoletaDemo } from "@/components/demo/RoletaDemo";
-import { JogoDaMemoriaDemo } from "@/components/demo/JogoDaMemoriaDemo";
-import { RaspadinhaDemo } from "@/components/demo/RaspadinhaDemo";
-import { QuebracabecaDemo } from "@/components/demo/QuebracabecaDemo";
-import { QuizDemo } from "@/components/demo/QuizDemo";
-import { VerdadeiroFalsoDemo } from "@/components/demo/VerdadeiroFalsoDemo";
-import { PegueOsItensDemo } from "@/components/demo/PegueOsItensDemo";
-import { CaixaMisteriosaDemo } from "@/components/demo/CaixaMisteriosaDemo";
 import { games, getGameBySlug, CATEGORY_LABELS } from "@/content/games";
 import { SITE_URL } from "@/lib/contact";
 
@@ -41,20 +29,61 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const DEMOS: Record<string, React.ReactNode> = {
-  "roleta-premiada":     <RoletaDemo />,
-  "caca-niquel":         <CacaNiquelDemo />,
-  "plinko":              <PlinkoDemo />,
-  "cobranca-de-penalti": <PenaltiDemo />,
-  "bate-toupeira":       <BateToupeiraDemo />,
-  "jogo-da-memoria":     <JogoDaMemoriaDemo />,
-  "raspadinha":          <RaspadinhaDemo />,
-  "quebra-cabeca":       <QuebracabecaDemo />,
-  "quiz":                <QuizDemo />,
-  "flappy":              <VerdadeiroFalsoDemo />,
-  "pegue-os-itens":     <PegueOsItensDemo />,
-  "caixa-misteriosa":   <CaixaMisteriosaDemo />,
-};
+// Loader sob demanda: cada página estática só inclui seu próprio demo.
+async function loadDemo(slug: string): Promise<React.ReactNode | null> {
+  switch (slug) {
+    case "roleta-premiada": {
+      const { RoletaDemo: C } = await import("@/components/demo/RoletaDemo");
+      return <C />;
+    }
+    case "caca-niquel": {
+      const { CacaNiquelDemo: C } = await import("@/components/demo/CacaNiquelDemo");
+      return <C />;
+    }
+    case "plinko": {
+      const { PlinkoDemo: C } = await import("@/components/demo/PlinkoDemo");
+      return <C />;
+    }
+    case "cobranca-de-penalti": {
+      const { PenaltiDemo: C } = await import("@/components/demo/PenaltiDemo");
+      return <C />;
+    }
+    case "bate-toupeira": {
+      const { BateToupeiraDemo: C } = await import("@/components/demo/BateToupeiraDemo");
+      return <C />;
+    }
+    case "jogo-da-memoria": {
+      const { JogoDaMemoriaDemo: C } = await import("@/components/demo/JogoDaMemoriaDemo");
+      return <C />;
+    }
+    case "raspadinha": {
+      const { RaspadinhaDemo: C } = await import("@/components/demo/RaspadinhaDemo");
+      return <C />;
+    }
+    case "quebra-cabeca": {
+      const { QuebracabecaDemo: C } = await import("@/components/demo/QuebracabecaDemo");
+      return <C />;
+    }
+    case "quiz": {
+      const { QuizDemo: C } = await import("@/components/demo/QuizDemo");
+      return <C />;
+    }
+    case "flappy": {
+      const { VerdadeiroFalsoDemo: C } = await import("@/components/demo/VerdadeiroFalsoDemo");
+      return <C />;
+    }
+    case "pegue-os-itens": {
+      const { PegueOsItensDemo: C } = await import("@/components/demo/PegueOsItensDemo");
+      return <C />;
+    }
+    case "caixa-misteriosa": {
+      const { CaixaMisteriosaDemo: C } = await import("@/components/demo/CaixaMisteriosaDemo");
+      return <C />;
+    }
+    default:
+      return null;
+  }
+}
 
 function placeholder(name: string) {
   return (
@@ -70,7 +99,7 @@ export default async function GameDetailPage({ params }: Props) {
   const game = getGameBySlug(slug);
   if (!game) notFound();
 
-  const demo = DEMOS[game.slug] ?? placeholder(game.name);
+  const demo = (await loadDemo(game.slug)) ?? placeholder(game.name);
   const otherGames = games.filter((g) => g.slug !== game.slug);
 
   const url = `${SITE_URL}/jogos/${game.slug}`;
