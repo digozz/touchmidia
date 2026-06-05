@@ -3,7 +3,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Container } from "@/components/layout/Container";
-import { TotemMockup } from "@/components/demo/TotemMockup";
+import { DemoSlot } from "@/components/demo/DemoSlot";
 import { GameCard } from "@/components/games/GameCard";
 import { WhatsappButton } from "@/components/ui/WhatsappButton";
 import { buildWhatsappUrl, WHATSAPP_MESSAGES } from "@/lib/contact";
@@ -80,7 +80,7 @@ export function GameDetailLayout({ game, demo, otherGames }: Props) {
 
             <div className="flex items-start justify-center">
               <div className="w-full max-w-[380px]">
-                <TotemMockup>{demo}</TotemMockup>
+                <DemoSlot title={game.name}>{demo}</DemoSlot>
               </div>
             </div>
           </Container>

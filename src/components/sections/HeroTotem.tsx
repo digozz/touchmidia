@@ -3,7 +3,7 @@
 import { useEffect, useState, type ComponentType } from "react";
 import dynamic from "next/dynamic";
 import { m, AnimatePresence } from "framer-motion";
-import { TotemMockup } from "@/components/demo/TotemMockup";
+import { DemoSlot } from "@/components/demo/DemoSlot";
 
 // Cada demo vira chunk próprio. Carregamento sob demanda.
 const lazy = (loader: () => Promise<{ [k: string]: ComponentType }>, exportName: string) =>
@@ -28,13 +28,15 @@ const ROTATE_MS = 3500;
 
 export function HeroTotem() {
   const [idx, setIdx] = useState(0);
+  const [paused, setPaused] = useState(false);
 
   useEffect(() => {
+    if (paused) return;
     const id = setInterval(() => {
       setIdx((i) => (i + 1) % SLIDES.length);
     }, ROTATE_MS);
     return () => clearInterval(id);
-  }, []);
+  }, [paused]);
 
   const current = SLIDES[idx];
   const Demo = current.Demo;
@@ -57,7 +59,7 @@ export function HeroTotem() {
         </AnimatePresence>
       </div>
 
-      <TotemMockup>
+      <DemoSlot title={current.name} onModalChange={setPaused}>
         <AnimatePresence mode="wait">
           <m.div
             key={idx}
@@ -69,7 +71,7 @@ export function HeroTotem() {
             <Demo />
           </m.div>
         </AnimatePresence>
-      </TotemMockup>
+      </DemoSlot>
     </div>
   );
 }
